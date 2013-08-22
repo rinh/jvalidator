@@ -141,6 +141,10 @@ jvalidator
 
 ### 如何看 demo ###
 
+http://gist.corp.qunar.com/hao.lin/jvalidator-demo/index.html
+
+或
+
 将源码下载，解压后进入目录
 
     fekit install

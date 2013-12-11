@@ -1,4 +1,3 @@
-var $ = require('jquery');
 var Async = require('./AsyncRequest.js');
 var parser = require('./RuleParser.js');
 
@@ -14,7 +13,7 @@ var CONSTANT = {
 
 // ## 字段检查器
 // 绑定到某个字段后，对其进行检查等操作
-function FieldChecker( element ){
+function FieldChecker( element ) {
     this.element = element;
     this.$element = $(element);
     this.$form = this.$element.closest('form');

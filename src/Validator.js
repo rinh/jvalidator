@@ -304,11 +304,11 @@ function _parse_selector_syntax( selector ) {
 
 FormValidator.prototype = {
 
-    // 得到所有需要验证的字段（非隐藏）
+    // 得到所有需要验证的字段（非隐藏且不为disabled）
     _getAllFieldValidator : function() {
         var self = this;
         return this.$form.find('[data-' + CONSTANT.PATTERN + ']').filter(function(){
-            return _exists(this);
+            return _exists(this) && !this.disabled;
         }).map(function(){
             return _getFieldValidator(this);
         }).toArray();

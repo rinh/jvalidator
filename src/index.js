@@ -13,7 +13,7 @@ var validFunc = {
         num = num.toUpperCase();  
         
         //身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X。   
-        if (!(/(^\d{15}$)|(^\d{17}([0-9]|X)$)/.test(num))) { 
+        if (!(/(^\d{15}$)|(^\d{17}(\d|X)$)/.test(num))) { 
             return -1; 
         }
         
@@ -40,7 +40,7 @@ var validFunc = {
         
         if (len == 18) {
             
-            re = new RegExp(/^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)$/); 
+            re = new RegExp(/^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})(\d|X)$/); 
             var arrSplit = num.match(re); 
 
             //检查生日日期是否正确 
@@ -93,7 +93,7 @@ v.addPattern('non-required',{
 v.addPattern('numeric',{
     message : '必须是数字' , 
     validate : function( value , done ) {
-        done( /^[0-9]+$/.test( value ) );
+        done( /^\d+$/.test( value ) );
     }
 });
 
@@ -101,14 +101,14 @@ v.addPattern('numeric',{
 v.addPattern('int',{
     message : '必须是整数' , 
     validate : function( value , done ) {
-        done( /^\-?[0-9]+$/.test( value ) );
+        done( /^\-?\d+$/.test( value ) );
     }
 });
 
 v.addPattern('decimal',{
     message : '必须是小数' , 
     validate : function( value , done ) {
-        done( /^\-?[0-9]*\.?[0-9]+$/.test( value ) );
+        done( /^\-?\d*\.?\d+$/.test( value ) );
     }
 });
 
@@ -282,7 +282,7 @@ v.addPattern('equal',{
 v.addPattern('ip',{ 
     message : '必须符合ip格式',
     validate : function( value , done ){
-        done( /^((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})$/i.test(value) );
+        done( /^((25[0-5]|2[0-4]\d|1\d{2}|\d{1,2})\.){3}(25[0-5]|2[0-4]\d|1\d{2}|\d{1,2})$/i.test(value) );
     }
 });
 

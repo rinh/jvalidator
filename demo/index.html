@@ -38,7 +38,7 @@ input { outline:none; border:1px solid #000; }
                 $(this.element).css('border','1px solid #000');
             });
 
-            jv.fail(function( errors ){
+            jv.fail(function( $event , errors ){
                 $(this.element).css('border','1px solid #f00');
             });
         }

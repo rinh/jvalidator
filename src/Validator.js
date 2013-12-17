@@ -92,8 +92,9 @@ FieldChecker.prototype = {
     // * done *
     //  可以不传，即为触发检查 
     //  `checkResult` boolean 检查结果 
+    //  `evt` 为触发的事件，可以没有
     //  `errors` array 错误信息
-    check : function( checkCallback ) {
+    check : function( $event , checkCallback ) {
 
         var self = this;
         var async = this.async;
@@ -107,7 +108,7 @@ FieldChecker.prototype = {
         async.onfinished = function(){
             var errors = self._checkPatternResult( rule_str , patterns );
             if ( checkCallback ) { checkCallback( errors.length == 0 , errors ); }
-            self.after_check( errors.length == 0 , errors );
+            self.after_check( errors.length == 0 , errors , $event );
         };
 
         $.each( patterns , function(){
@@ -264,13 +265,13 @@ FieldChecker.prototype = {
     } , 
 
     // 触发自验证行为
-    after_check : function( is_valid , errors ) {
+    after_check : function( is_valid , errors , $event ) {
         var type = is_valid ? 'success' : 'fail';
         var evt = this.$element.data( CONSTANT.FIELD_EVENTS + type );
         if( !evt ) evt = this.$form.data( CONSTANT.FIELD_EVENTS + type );
         if( !evt || typeof evt != 'function') return;
 
-        evt.call( this , errors );
+        evt.call( this , $event , errors );
     }
 
 };
@@ -344,7 +345,7 @@ FormValidator.prototype = {
             
             (function(jv){
                 async.addRequest(function(async_continue){
-                    jv.check(function( checkResult , error ){
+                    jv.check( null , function( checkResult , error ){
                         if( !checkResult ){ errors.push( error ) }
                         async_continue();
                     });
@@ -408,9 +409,9 @@ FormValidator.prototype = {
 
             this.$form.undelegate( _sel , _evts );
 
-            this.$form.delegate( _sel , _evts , function(evt){
+            this.$form.delegate( _sel , _evts , function($event){
                 var jv = _getFieldValidator( this );
-                jv && jv.check();
+                jv && jv.check( $event );
             })
         }
 

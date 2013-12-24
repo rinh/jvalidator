@@ -11,6 +11,7 @@ describe 'parser', ->
         assert.throw () ->
             parser.parse('abc')
 
+
         assert.equal parser.parse('required')[0].name , 'required'
         assert.equal parser.parse('required&required')[0].name , 'required'
         assert.equal parser.parse('required&required|required')[4].name , 'required'
@@ -29,4 +30,3 @@ describe 'parser', ->
         assert.equal a[5].value , 'xxx@x x'
         assert.equal a[7].name , 'match'
         assert.equal a[7].value , '@bbb'
-

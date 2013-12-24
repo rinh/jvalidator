@@ -3,6 +3,7 @@ jvalidator
 
 ### Change Log ###
 0.3.0 去除jquery依赖
+0.3.3 简化 parser， 不再使用 jison
 
 
 ### 基本使用 ###

@@ -21,7 +21,7 @@ function _tokenized( str ) {
     return s;
 }
 
-var regName = /^(@?\w+)(\[.+\])?$/;
+var regName = /^(@?[\w\-]+)(\[.+\])?$/;
 
 function _parse( tokens ) {
     var ast = [];

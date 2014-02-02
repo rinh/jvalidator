@@ -146,7 +146,7 @@ jvalidator
 
 ### 如何看 demo ###
 
-http://gist.corp.qunar.com/hao.lin/jvalidator-demo/index.html
+http://gist.corp.qunar.com/hao.lin/jvalidator/demo/index.html
 
 或
 
@@ -155,7 +155,7 @@ http://gist.corp.qunar.com/hao.lin/jvalidator-demo/index.html
     fekit install
     fekit min -f src/index.js -o demo/jvalidator.min.js
 
-http://localhost/demo/index.html
+直接查看 demo/index.html
 
 
 

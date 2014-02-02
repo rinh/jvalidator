@@ -13,6 +13,14 @@
 input { outline:none; border:1px solid #000; }
 </style>
 <script>
+
+    $.jvalidator.addPattern('must',{
+        message : '必须写成12345' , 
+        validate : function( value , done ) {
+            done( value == "12345" ); 
+        }
+    });
+
     function initForm( formSelector , options ) {
         var jv = $(formSelector).jvalidator();
         options = options || {};
@@ -106,6 +114,16 @@ input { outline:none; border:1px solid #000; }
         });
     </script>
 
+    <form id="form6_1">
+        <pre>自定义规则：值必须为<i>12345</i></pre>
+        <input name="name" data-jvalidator-pattern="must" />
+        <input type="button" value="验证" />
+    </form>
+
+    <script>
+        var f = initForm('#form6_1');
+    </script>    
+
     <h2>高级验证规则</h2>
 
     <form id="form7">
@@ -166,7 +184,7 @@ input { outline:none; border:1px solid #000; }
 
 
     <form id="form10">
-        <pre>组合验证 1</pre>
+        <pre>组合验证 1： a.第一个框必须是字母或数字 b.判断第二个框是否与第一个相同</pre>
         <input name="pwd" type="password" data-jvalidator-pattern="alpha_numeric" />
         <input name="repwd" type="password" data-jvalidator-pattern="match[@pwd]" />
         <input type="button" value="验证" />
@@ -178,7 +196,7 @@ input { outline:none; border:1px solid #000; }
 
 
     <form id="form11">
-        <pre>组合验证 2</pre>
+        <pre>组合验证 2： input中必须包含select选择的内容</pre>
         <select name="name">
             <option value="aaa">aaa</option>
             <option value="bbb">bbb</option>
@@ -192,7 +210,7 @@ input { outline:none; border:1px solid #000; }
     </script>
 
     <form id="form12">
-        <pre>组合验证 3</pre>
+        <pre>组合验证 3： 如果select选择的是aaa，那么input必须是111. 如果select选择的是bbb，那么input必须是222. </pre>
         <em>城市：</em>
         <select data-jvalidator-cname="城市" name="name">
             <option value="aaa">aaa</option>
@@ -207,7 +225,7 @@ input { outline:none; border:1px solid #000; }
     </script>
 
     <form id="form13">
-        <pre>组合规则 4</pre>
+        <pre>组合规则 4： 如果选择身份证，则按身份证规则校验。 如果选择护照，则按护照规则校验（0到20位字母或数字）</pre>
         <label><input name="type" type="radio" value="idcard" checked="checked" />身份证</label>
         <label><input name="type" type="radio" value="passport" />护照</label>
         <br />
@@ -241,8 +259,8 @@ input { outline:none; border:1px solid #000; }
             <option value="北京">北京</option>
             <option value="上海">上海</option>
         </select>
-        <input name="name" data-jvalidator-cname="姓名" data-jvalidator-pattern="required" />
-        <input name="passport" data-jvalidator-pattern="required" />
+        姓名：<input name="name" data-jvalidator-cname="姓名" data-jvalidator-pattern="required" />
+        护照：<input name="passport" data-jvalidator-pattern="required" />
         <input type="button" value="验证" />
     </form>
 
@@ -262,6 +280,25 @@ input { outline:none; border:1px solid #000; }
 
     <script>
         var f = initForm('#form17');
+    </script>
+
+
+    <form id="form17_1">
+        <pre>异步验证：必须是数字，且等3秒才会验证成功</pre>
+        <input data-jvalidator-pattern="numeric&checked" />
+        <input type="button" value="验证" />
+    </form>
+
+    <script>
+        var f = initForm('#form17_1');
+        $.jvalidator.addPattern('checked',{
+            message : "异步验证" , 
+            validate : function( value , done ){
+                setTimeout(function(){
+                    done(true)
+                },3000)
+            }
+        });
     </script>
 
     <form id="form18">

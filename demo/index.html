@@ -138,22 +138,25 @@ input { outline:none; border:1px solid #000; }
         <select data-jvalidator-pattern="match[aaa]">
             <option value="aaa">aaa</option>
             <option value="bbb">bbb</option>
-        </select>
+        </select> 必须选择 aaa
         <br />
         <label><input name="chk" type="checkbox" value="1" data-jvalidator-pattern="contain[1]|contain[2]" />1</label>
         <label><input name="chk" type="checkbox" value="2" />2</label>
         <label><input name="chk" type="checkbox" value="3" />3</label>
         <label><input name="chk" type="checkbox" value="4" />4</label>
         <label><input name="chk" type="checkbox" value="5" />5</label>
+        必须包含 1 或 2
         <br />
         <label><input name="rdo" type="radio" value="1" data-jvalidator-pattern="match[1]|match[2]" />1</label>
         <label><input name="rdo" type="radio" value="2" />2</label>
         <label><input name="rdo" type="radio" value="3" />3</label>
         <label><input name="rdo" type="radio" value="4" />4</label>
         <label><input name="rdo" type="radio" value="5" />5</label>
+        必须选择 1 或 2
         <br />
         <textarea data-jvalidator-pattern="required"></textarea>
-
+        必须有内容
+        <br />
         <input type="button" value="验证" />
     </form>
 

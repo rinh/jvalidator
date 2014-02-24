@@ -107,8 +107,9 @@ FieldChecker.prototype = {
         async.clear();
         async.onfinished = function(){
             var errors = self._checkPatternResult( rule_str , patterns );
-            if ( checkCallback ) { checkCallback( errors.length == 0 , errors ); }
+            
             self.after_check( errors.length == 0 , errors , $event );
+            if ( checkCallback ) { checkCallback( errors.length == 0 , errors ); }
         };
 
         $.each( patterns , function(){
@@ -500,6 +501,7 @@ exports.addPattern = addPattern;
 
 $.extend({
     jvalidator: {
-        addPattern : addPattern
+        addPattern : addPattern ,
+        PATTERNS : PATTERNS
     }
 });

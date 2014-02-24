@@ -295,6 +295,10 @@ function _exists( el ){
 
 // 得到指定元素的jvalidator
 function _getFieldValidator( el ){
+    if( el.nodeName == "INPUT" && ( el.type == "checkbox" || el.type == "radio" ) ) {
+        el = $(el).closest("form").find("input[data-" + CONSTANT.PATTERN + "][name=" + el.name + "]")[0];
+    }
+    if( !el ) return;
     if( !$(el).data( CONSTANT.PATTERN ) ) return;
     return el._field_validator ? el._field_validator : ( el._field_validator = new FieldChecker( el ) );
 }
@@ -381,25 +385,26 @@ FormValidator.prototype = {
 
         var events = {};
         var sel = selector || "[data-" + CONSTANT.PATTERN + "]";
-        if( $.isArray(evts) ) {  
-            events[ sel ] = evts ;
-        } else if( $.isPlainObject(evts) ) {
-            $.extend( events , evts );
-        }
 
         // 处理 checkbox 和 radio
-        var chks = this.$form.find(sel).find('input:checkbox');
+        var chks = this.$form.find(sel).filter('input:checkbox');
         if( chks.length ) {
             chks.each(function(){
                 sel += "," + _parse_selector_syntax( "@" + this.name )
             });
         }
 
-        var rdos = this.$form.find(sel).find('input:radio');
+        var rdos = this.$form.find(sel).filter('input:radio');
         if( rdos.length ) {
             rdos.each(function(){
                 sel += "," + _parse_selector_syntax( "@" + this.name )
             });
+        }
+
+        if( $.isArray(evts) ) {  
+            events[ sel ] = evts ;
+        } else if( $.isPlainObject(evts) ) {
+            $.extend( events , evts );
         }
 
         for( var targetSelector in events ) {

@@ -5,7 +5,7 @@ jvalidator
 0.3.0 去除jquery依赖
 0.3.3 简化 parser， 不再使用 jison
 0.3.5 修正 validatorAll 的 callback 执行顺序，并添加接口 $.jvalidator.PATTERNS
-
+0.3.6 修正 radio,checkbox 不触发事件的问题
 
 ### 基本使用 ###
 

@@ -6,6 +6,7 @@ jvalidator
 0.3.3 简化 parser， 不再使用 jison
 0.3.5 修正 validatorAll 的 callback 执行顺序，并添加接口 $.jvalidator.PATTERNS
 0.3.6 修正 radio,checkbox 不触发事件的问题
+0.3.7 理论支持任何元素验证，只要扩展该元素的 value 属性
 
 ### 基本使用 ###
 

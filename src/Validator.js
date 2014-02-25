@@ -262,6 +262,8 @@ FieldChecker.prototype = {
             case 'textarea':
                 placeholdertext = $e.data( CONSTANT.PLACEHOLDER );
                 return placeholdertext === e.value ? "" : e.value;
+            default:
+                return e.value;
         }
     } , 
 

@@ -263,7 +263,12 @@ FieldChecker.prototype = {
                 placeholdertext = $e.data( CONSTANT.PLACEHOLDER );
                 return placeholdertext === e.value ? "" : e.value;
             default:
-                return e.value;
+                var r;
+                r = $e.attr('data-value');
+                if( typeof r != 'undefined' ) return r;
+                r = e.value;
+                if( typeof r != 'undefined' ) return r;
+                return r;
         }
     } , 
 

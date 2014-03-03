@@ -59,7 +59,7 @@ FieldChecker.prototype = {
             }
         }
 
-        if( this.$form.data(CONSTANT.DEBUG) ) {
+        if( this.$form.attr( "data-" + CONSTANT.DEBUG) ) {
             console.info( this , this.element , str , rstr.join('') )
         }
 
@@ -80,7 +80,7 @@ FieldChecker.prototype = {
     // 验证自身的 pattern 是否合法以及是否满足所有项，以供开发自测使用
     checkPattern : function(){
         var $e = this.$element;
-        var rule_str = $e.data( CONSTANT.PATTERN );
+        var rule_str = $e.attr( "data-" +  CONSTANT.PATTERN );
         try {
             var patterns = parser.parse( rule_str );
         } catch(e) {
@@ -101,7 +101,7 @@ FieldChecker.prototype = {
         var e = this.element;
         var $e = this.$element;
         var value = this.value();
-        var rule_str = $e.data( CONSTANT.PATTERN );
+        var rule_str = $e.attr( "data-" +  CONSTANT.PATTERN );
         var patterns = parser.parse( rule_str );
 
         async.clear();
@@ -163,8 +163,8 @@ FieldChecker.prototype = {
                 // 得到元素的 cname 或 name
                 getElementName : function ( el ) {
                     var $el = $(el);
-                    if( $el.data( CONSTANT.CNAME ) ) {
-                        return $el.data( CONSTANT.CNAME )
+                    if( $el.attr( "data-" +  CONSTANT.CNAME ) ) {
+                        return $el.attr( "data-" +  CONSTANT.CNAME )
                     } else {
                         return $el.attr('name');    
                     }
@@ -178,7 +178,7 @@ FieldChecker.prototype = {
                 p.validate( value , function( is_valid ){
                     p.result = is_valid;
                     async_continue();
-                })
+                }, $event );
 
             }); })(p);
         })
@@ -199,13 +199,14 @@ FieldChecker.prototype = {
         var $e = this.$element;
         var $f = this.$form;
         var v = value || _getFieldValidator(e).value();
-        var msg_tmpl = ( e[ CONSTANT.MESSAGE_ATTR ] ? e[ CONSTANT.MESSAGE_ATTR ][ patternName ] : null )
+        var msg_tmpl = $e.attr('data-jvalidator-message')
+                       || ( e[ CONSTANT.MESSAGE_ATTR ] ? e[ CONSTANT.MESSAGE_ATTR ][ patternName ] : null )
                        || ( $f[0][ CONSTANT.MESSAGE_ATTR ] ? $f[0][ CONSTANT.MESSAGE_ATTR ][ patternName ] : null )
                        || ( PATTERNS[ patternName ].message );
 
         msg_tmpl = msg_tmpl.replace( /%val\b/g , v ) 
         msg_tmpl = msg_tmpl.replace( /%name\b/g , e.name )
-        msg_tmpl = msg_tmpl.replace( /%cname\b/g , $e.data( CONSTANT.CNAME) ) 
+        msg_tmpl = msg_tmpl.replace( /%cname\b/g , $e.attr( "data-" +  CONSTANT.CNAME) ) 
         msg_tmpl = msg_tmpl.replace( /=%argu\b/g , function(){
                             var v = self.parseNameSymbol( self.value );
                             return v && v.tagName ? self.getElementValue( v ) : self.value;
@@ -220,8 +221,8 @@ FieldChecker.prototype = {
                                 return "";
                             } else {
                                 var $el = $(el);
-                                if( $el.data( CONSTANT.CNAME ) ) {
-                                    return $el.data( CONSTANT.CNAME )
+                                if( $el.attr( "data-" +  CONSTANT.CNAME ) ) {
+                                    return $el.attr( "data-" +  CONSTANT.CNAME )
                                 } else {
                                     return $el.attr('name');    
                                 }
@@ -250,7 +251,7 @@ FieldChecker.prototype = {
                             return this.value;
                         }).toArray().join(',');
                     case 'text':
-                        placeholdertext = $e.data( CONSTANT.PLACEHOLDER );
+                        placeholdertext = $e.attr( "data-" +  CONSTANT.PLACEHOLDER );
                         return placeholdertext === e.value ? "" : e.value;
                     case 'hidden':
                     case 'password':
@@ -260,7 +261,7 @@ FieldChecker.prototype = {
             case 'select':
                 return e.value;
             case 'textarea':
-                placeholdertext = $e.data( CONSTANT.PLACEHOLDER );
+                placeholdertext = $e.attr( "data-" +  CONSTANT.PLACEHOLDER );
                 return placeholdertext === e.value ? "" : e.value;
             default:
                 var r;
@@ -306,7 +307,7 @@ function _getFieldValidator( el ){
         el = $(el).closest("form").find("input[data-" + CONSTANT.PATTERN + "][name=" + el.name + "]")[0];
     }
     if( !el ) return;
-    if( !$(el).data( CONSTANT.PATTERN ) ) return;
+    if( !$(el).attr( "data-" +  CONSTANT.PATTERN ) ) return;
     return el._field_validator ? el._field_validator : ( el._field_validator = new FieldChecker( el ) );
 }
 
@@ -514,6 +515,9 @@ exports.addPattern = addPattern;
 $.extend({
     jvalidator: {
         addPattern : addPattern ,
-        PATTERNS : PATTERNS
+        PATTERNS : PATTERNS , 
+        getFieldValidator : function( el ) {
+            return _getFieldValidator( el );
+        }
     }
 });

@@ -16,7 +16,7 @@ AsyncRequest.prototype.go = function(){
     var reqs = this.reqs;
     var len = this.reqs.length;
     
-    for(var i=0;i<reqs.length;i++){
+    for(var i=0,len=reqs.length;i<len;i++){
         var req = reqs[i];
 
         if(this.status==0) return;

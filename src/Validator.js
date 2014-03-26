@@ -50,7 +50,7 @@ FieldChecker.prototype = {
     _checkPatternResult : function( str , results ) {
         var self = this;
         var rstr = [];
-        for( var i = 0; i < results.length; i++ ) {
+        for( var i = 0,len=results.length; i <len ; i++ ) {
             var p = results[i];
             if( p.name ) {
                 rstr.push( p.result );
@@ -347,7 +347,7 @@ FormValidator.prototype = {
             return validateAllCallback( true , [] );
         }
 
-        for( var i = 0; i < _jvs.length; i++ ) {
+        for( var i = 0,len=_jvs.length; i <len ; i++ ) {
             var jv = _jvs[i];
             
             (function(jv){

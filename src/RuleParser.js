@@ -2,7 +2,7 @@ var PARSER = {};
 
 function _tokenized( str ) {
     var s = [];
-    for( var i = 0; i < str.length; i++ ) {
+    for( var i = 0,len=str.length; i < len; i++ ) {
         var chr = str.charAt(i);
         switch( chr ) {
             case '(':

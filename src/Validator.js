@@ -24,7 +24,7 @@ FieldChecker.prototype = {
 
     _getPatternMessage : function( results ) {  
         var rstr = [];
-        for( var i = 0; i < results.length; i++ ) {
+        for( var i = 0,len=results.length; i <len ; i++ ) {
             var p = results[i];
             if( p.name ) {
                 rstr.push( p.getMessage() );

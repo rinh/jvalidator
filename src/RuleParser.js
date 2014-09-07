@@ -11,7 +11,7 @@ function _tokenized( str ) {
             case '&':
             case '|':
                 s.push(chr);
-                s.push('');
+                (i !== len -1)  && s.push(''); // when i === len-1,should not push ''
                 break;
             default:
                 s.length ? s[s.length-1] += chr : s.push(chr);

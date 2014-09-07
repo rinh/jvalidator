@@ -137,21 +137,21 @@ v.addPattern('alpha_dash',{
 v.addPattern('chs',{
     message : '必须是中文字符',
     validate : function( value , done ) {
-        done( /^[\\u4E00-\\u9FFF]+$/i.test( value ) );
+        done( /^[\u4E00-\u9FFF]+$/i.test( value ) );
     }
 });
 
 v.addPattern('chs_numeric',{
     message : '必须是中文字符或数字',
     validate : function( value , done ) {
-        done( /^[\\u4E00-\\u9FFF0-9]+$/i.test( value ) );
+        done( /^[\u4E00-\u9FFF0-9]+$/i.test( value ) );
     }
 });
 
 v.addPattern('chs_numeric',{
     message : '必须是中文字符或数字及下划线等特殊字符' , 
     validate : function( value , done ) {
-        done( /^[\\u4E00-\\u9FFF0-9_\-]+$/i.test( value ) );
+        done( /^[\u4E00-\u9FFF0-9_\-]+$/i.test( value ) );
     }
 });
 

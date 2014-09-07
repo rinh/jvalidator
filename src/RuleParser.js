@@ -2,7 +2,7 @@ var PARSER = {};
 
 function _tokenized( str ) {
     var s = [];
-    for( var i = 0; i < str.length; i++ ) {
+    for( var i = 0,len=str.length; i < len; i++ ) {
         var chr = str.charAt(i);
         switch( chr ) {
             case '(':
@@ -11,7 +11,7 @@ function _tokenized( str ) {
             case '&':
             case '|':
                 s.push(chr);
-                s.push('');
+                (i !== len -1)  && s.push(''); // when i === len-1,should not push ''
                 break;
             default:
                 s.length ? s[s.length-1] += chr : s.push(chr);

@@ -168,3 +168,4 @@ jvalidator的规则解析器依赖了jison，需要修改的时候请重新执�
 
     jison src/RuleParser.jison -m js -o src/RuleParser.js 
 
+刚接触Github,正在摸索中。。。。。。

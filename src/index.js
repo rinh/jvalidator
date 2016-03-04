@@ -1,3 +1,4 @@
+var test;
 var v = require('./Validator.js');
 
 var validFunc = {

@@ -1,6 +1,6 @@
 assert = module.parent.require('chai').assert
 parser = require('../src/RuleParser')
-
+//
 parser.add 'required' 
 parser.add '@' , {  argument : true  }
 parser.add 'match' , {  argument : true  }

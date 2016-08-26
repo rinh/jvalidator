@@ -1,5 +1,5 @@
-var v = require('./Validator.js');
-
+﻿var v = require('./Validator.js');
+var ttt="111241234123412412412412";
 var validFunc = {
     
     /***

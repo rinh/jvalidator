@@ -1,5 +1,7 @@
-var Async = require('./AsyncRequest.js');
+﻿var Async = require('./AsyncRequest.js');
 var parser = require('./RuleParser.js');
+var aaaa = '';
+
 
 var PATTERNS = {}
 var CONSTANT = {

@@ -1,59 +1,58 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml"> 
 <head>  
-<meta http-equiv="X-UA-Compatible" content="IE=7" /> 
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /> 
-<title>Qunar.com</title> 
-<meta name="Robots" content="index,follow,NOODP" /> 
-<meta http-equiv="cache-control" content="no-cache" /> 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
-<script src="jquery.js"></script>
-<script src="jvalidator.min.js"></script>
-<style>
-input { outline:none; border:1px solid #000; }
-</style>
-<script>
-
-    $.jvalidator.addPattern('must',{
-        message : '必须写成12345' , 
-        validate : function( value , done ) {
-            done( value == "12345" ); 
-        }
-    });
-
-    function initForm( formSelector , options ) {
-        var jv = $(formSelector).jvalidator();
-        options = options || {};
-        
-        $(formSelector).find('input:button').bind('click',function(evt){
-            jv.validateAll(function( result , elements ){
-                if( result ) {
-                    alert('验证通过.');
-                } else {
-                    var msg = ['验证未通过.']
-                    for(var i=0; i<elements.length; i++){
-                        msg.push( elements[i].getMessage() )
-                    }
-                    alert( msg.join('\n') );
-                }
-            });
+    <meta http-equiv="X-UA-Compatible" content="IE=7" /> 
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /> 
+    <title>Qunar.com</title> 
+    <meta name="Robots" content="index,follow,NOODP" /> 
+    <meta http-equiv="cache-control" content="no-cache" /> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+    <script src="jquery.js"></script>
+    <script src="jvalidator.min.js"></script>
+    <style>
+        input { outline:none; border:1px solid #000; }
+    </style>
+    <script>
+        $.jvalidator.addPattern('must',{
+            message : '必须写成12345' , 
+            validate : function( value , done ) {
+                done( value == "12345" ); 
+            }
         });
 
-        if( options.events ) {
-            jv.when( options.events );
-
-            jv.success(function(){
-                $(this.element).css('border','1px solid #000');
+        function initForm( formSelector , options ) {
+            var jv = $(formSelector).jvalidator();
+            options = options || {};
+            
+            $(formSelector).find('input:button').bind('click',function(evt){
+                jv.validateAll(function( result , elements ){
+                    if( result ) {
+                        alert('验证通过.');
+                    } else {
+                        var msg = ['验证未通过.']
+                        for(var i=0; i<elements.length; i++){
+                            msg.push( elements[i].getMessage() )
+                        }
+                        alert( msg.join('\n') );
+                    }
+                });
             });
 
-            jv.fail(function( $event , errors ){
-                $(this.element).css('border','1px solid #f00');
-            });
+            if( options.events ) {
+                jv.when( options.events );
+
+                jv.success(function(){
+                    $(this.element).css('border','1px solid #000');
+                });
+
+                jv.fail(function( $event , errors ){
+                    $(this.element).css('border','1px solid #f00');
+                });
+            }
+
+            return jv;
         }
-
-        return jv;
-    }
-</script>
+    </script>
 </head> 
 <body style="padding:10px;">
 	
@@ -326,8 +325,6 @@ input { outline:none; border:1px solid #000; }
             }
         });
     </script>
-
-
     
 </body>
 </html> 
